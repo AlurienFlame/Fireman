@@ -22,7 +22,7 @@ public class Fireman implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
         // Setup keybind
-        keyToggleFireman = new KeyBinding("key.fireman.togglefireman", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_P,
+        keyToggleFireman = new KeyBinding("key.fireman.togglefireman", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_K,
                 "category.fireman.Fireman");
 
         KeyBindingHelper.registerKeyBinding(keyToggleFireman);
