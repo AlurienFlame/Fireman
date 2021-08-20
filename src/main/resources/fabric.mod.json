@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "fireman",
-  "version": "1.0.0",
+  "version": "1.1.0",
 
   "name": "Fireman",
   "description": "Automatically punch out nearby fires.",
@@ -14,7 +14,7 @@
   },
 
   "license": "MIT",
-  "icon": "assets/icon.png",
+  "icon": "assets/fireman/icon.png",
 
   "environment": "*",
   "entrypoints": {
@@ -26,11 +26,11 @@
   ],
 
   "depends": {
-    "fabricloader": ">=0.7.4",
+    "fabricloader": ">=0.11.3",
     "fabric": "*",
-    "minecraft": "1.16.x"
+    "minecraft": "1.17.x",
+    "java": ">=16"
   },
   "suggests": {
-    "flamingo": "*"
   }
 }

@@ -6,7 +6,7 @@ import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.fabricmc.fabric.api.event.client.ClientTickCallback;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.options.KeyBinding;
+import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.util.InputUtil;
 import net.minecraft.tag.BlockTags;
 import net.minecraft.text.LiteralText;
@@ -32,9 +32,11 @@ public class Fireman implements ClientModInitializer {
             if (keyToggleFireman.wasPressed()) {
                 isFiremanEnabled = !isFiremanEnabled;
                 if (isFiremanEnabled) {
-                    client.player.sendMessage(new LiteralText(new TranslatableText("notify.fireman.enabled").getString()), true);
+                    client.player.sendMessage(
+                            new LiteralText(new TranslatableText("notify.fireman.enabled").getString()), true);
                 } else {
-                    client.player.sendMessage(new LiteralText(new TranslatableText("notify.fireman.disabled").getString()), true);
+                    client.player.sendMessage(
+                            new LiteralText(new TranslatableText("notify.fireman.disabled").getString()), true);
                 }
             }
         });
@@ -70,7 +72,8 @@ public class Fireman implements ClientModInitializer {
                     BlockPos pos = new BlockPos(X + deltaX, Y + deltaY, Z + deltaZ);
 
                     // Punch fires
-                    if (client.world.getBlockState(pos).getBlock().isIn(BlockTags.FIRE)) {
+                    // 1.17 moved isIn() to BlockState from Block, so we don't need getBlock() anymore.
+                    if (client.world.getBlockState(pos).isIn(BlockTags.FIRE)) {
                         client.interactionManager.attackBlock(pos, Direction.UP);
                         return;
                     }
