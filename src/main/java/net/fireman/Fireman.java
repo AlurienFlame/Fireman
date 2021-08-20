@@ -39,25 +39,13 @@ public class Fireman implements ClientModInitializer {
                             new LiteralText(new TranslatableText("notify.fireman.disabled").getString()), true);
                 }
             }
-        });
-
-        // Register onTick event
-        ClientTickEvents.END_CLIENT_TICK.register(client -> {
-            onTick(client);
+            if (isFiremanEnabled && client.player != null) {
+                onTick(client);
+            }
         });
     }
 
     private void onTick(MinecraftClient client) {
-
-        // Do nothing if disabled
-        if (!isFiremanEnabled) {
-            return;
-        }
-
-        // Avoid crashing before a world has been loaded
-        if (client.player == null) {
-            return;
-        }
 
         // Find player location
         int X = (int) Math.floor(client.player.getX());
@@ -72,7 +60,6 @@ public class Fireman implements ClientModInitializer {
                     BlockPos pos = new BlockPos(X + deltaX, Y + deltaY, Z + deltaZ);
 
                     // Punch fires
-                    // 1.17 moved isIn() to BlockState from Block, so we don't need getBlock() anymore.
                     if (client.world.getBlockState(pos).isIn(BlockTags.FIRE)) {
                         client.interactionManager.attackBlock(pos, Direction.UP);
                         return;
